@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Item - LOST and FOUND ROXAS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Add Lost or Found Item</h1>
+  <a href="index.html" class="btn">Back to Home</a>
+</header>
+
+<form action="/add-item" method="POST" enctype="multipart/form-data" class="form-container">
+  <label>Title</label>
+  <input type="text" name="title" required>
+
+  <label>Description</label>
+  <textarea name="description" rows="4" required></textarea>
+
+  <label>Category</label>
+  <input type="text" name="category" required>
+
+  <label>Location</label>
+  <input type="text" name="location" required>
+
+  <label>Status</label>
+  <select name="status" required>
+    <option value="Lost">Lost</option>
+    <option value="Found">Found</option>
+  </select>
+
+  <label>Image (optional)</label>
+  <input type="file" name="image" accept="image/*">
+
+  <button type="submit">Add Item</button>
+</form>
+
+<footer>
+  <p>© 2025 Khert Laguna Garde</p>
+</footer>
+</body>
+</html>

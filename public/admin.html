@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - LOST and FOUND ROXAS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Admin Panel</h1>
+  <div>
+    <a href="index.html" class="btn">Home</a>
+    <a href="/admin-logout" class="btn">Logout</a>
+  </div>
+</header>
+
+<section id="items-container" class="items-container"></section>
+
+<footer>
+  <p>© 2025 Khert Laguna Garde</p>
+</footer>
+
+<script>
+const container = document.getElementById("items-container");
+
+async function loadItems(){
+  const res = await fetch("/items");
+  const items = await res.json();
+  container.innerHTML = "";
+
+  items.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "item-card";
+    card.innerHTML = `
+      ${item.image ? `<img src="${item.image}" alt="${item.title}">` : ""}
+      <div class="card-content">
+        <h3>${item.title}</h3>
+        <p><strong>Category:</strong> ${item.category}</p>
+        <p><strong>Location:</strong> ${item.location}</p>
+        <p><strong>Status:</strong> ${item.status}</p>
+        <p><strong>Date:</strong> ${item.date}</p>
+        ${item.status !== "Retrieved" ? `
+        <form action="/mark-retrieved" method="POST">
+          <input type="hidden" name="id" value="${item.id}">
+          <button type="submit" style="margin-top:10px;">Mark as Retrieved</button>
+        </form>` : ''}
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+loadItems();
+</script>
+</body>
+</html>
